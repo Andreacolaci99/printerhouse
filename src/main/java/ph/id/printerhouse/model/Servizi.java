@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Servizi {
@@ -21,6 +22,17 @@ public class Servizi {
 
     @NotBlank(message = "Il campo foto non può essere vuoto")
     private String urlFoto;
+
+    @NotNull
+    private String linkDettaglio;
+
+    public String getLinkDettaglio() {
+        return linkDettaglio;
+    }
+
+    public void setLinkDettaglio(String linkDettaglio) {
+        this.linkDettaglio = linkDettaglio;
+    }
 
     public int getId() {
         return id;

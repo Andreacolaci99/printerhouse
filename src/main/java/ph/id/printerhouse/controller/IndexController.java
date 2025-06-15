@@ -77,4 +77,16 @@ public class IndexController {
         serviziRepository.save(formServizi);
         return "redirect:/printerhouse/home";
     }
+
+    @GetMapping("/registratori")
+    public String indexRegistratori() {
+        return "/subpages/registratoriCassa";
+    }
+
+    @GetMapping("/multifunzione")
+    public String indexStampanti() {
+        return "/subpages/multifunzioni";
+    }
+    
+    
 }
