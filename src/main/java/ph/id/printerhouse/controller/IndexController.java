@@ -88,5 +88,9 @@ public class IndexController {
         return "/subpages/multifunzioni";
     }
     
+    @GetMapping("/riciclo")
+    public String indexRiciclo() {
+        return "/subpages/riciclo";
+    }
     
 }

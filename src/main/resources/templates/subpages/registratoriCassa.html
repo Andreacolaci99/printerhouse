@@ -2,64 +2,130 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Registratori di Cassa - PrinterHouse</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registratori di Cassa - PrinterHouse</title>
 
-    <link rel="stylesheet" th:href="@{/css/application.css}" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/application.css}" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+  <style>
+    body {
+      background-color: #f8f9fb;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    h1, h2 {
+      color: #1f2d40;
+    }
+
+    .page-header {
+      background: linear-gradient(to right, #e8f0f9, #f5fdfc);
+      padding: 50px 20px;
+      text-align: center;
+      border-radius: 15px;
+      margin-bottom: 40px;
+    }
+
+    .product-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-img {
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      flex-grow: 1;
+    }
+
+    a.card {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
 </head>
 
 <body>
-    <div th:replace="~{fragments/navbar}"></div>
+  <div th:replace="~{fragments/navbar}"></div>
 
-    <div class="container">
-        <div>
-            <h1>I Nostri Registratori Di Cassa</h1>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-3"> <!--Registratore RT-40-->
-                    <a class="card" style="width: 18rem;"
-                        th:href="@{https://www.3iecr.net/prodotto/registratori-telematici-rt/rt40/66/}">
-                        <img th:src="@{/img/registratori/RT-40.jpeg}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text"><strong>RT-40</strong></p>
-                            <p class="card-text">Registratore telematico dal design unico, si inserisce a piano titolo
-                                tra le macchine d fascia “entry level” dell’azienda.</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-3"> <!--Registratore RT-30-->
-                    <a class="card" style="width: 18rem;"
-                        th:href="@{https://www.3iecr.net/prodotto/registratori-telematici-rt/rt30/72/}">
-                        <img th:src="@{/img/registratori/RT-30.jpg}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text"><strong>RT-30</strong></p>
-                            <p class="card-text">Registratore telematico da design unico, si inserisce a pieno titolo
-                                tra le macchine di fascia media dell'azienda.</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-3"> <!--Registratore RT-52-->
-                    <a class="card" style="width: 18rem;"
-                        th:href="@{https://www.3iecr.net/prodotto/registratori-telematici-rt/rt52/67/}">
-                        <img th:src="@{/img/registratori/RT-52.jpg}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text"><strong>RT-52</strong></p>
-                            <p class="card-text">Registratore telematico dal design armonioso e moderno si inserisce a
-                                pieno titolo tra le macchine di fascia alta dell'azienda 3i Retail Solutions.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
+  <div class="container mt-5 mb-5">
+    <div class="page-header">
+      <h1 class="display-5">I Nostri Registratori di Cassa</h1>
+      <p class="lead">Tecnologia avanzata, design moderno, funzionalità intuitive: scegli il tuo alleato per la gestione fiscale.</p>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
+
+    <div class="row g-4">
+      <!-- RT-40 -->
+      <div class="col-md-6 col-lg-4 d-flex">
+        <a class="card product-card" th:href="@{https://www.3iecr.net/prodotto/registratori-telematici-rt/rt40/66/}">
+          <img th:src="@{/img/registratori/RT-40.jpeg}" class="card-img-top product-img" alt="RT-40">
+          <div class="card-body">
+            <h5 class="card-title">RT-40</h5>
+            <p class="card-text">Registratore telematico compatto, perfetto per chi cerca un'opzione entry-level affidabile ed elegante.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- RT-30 -->
+      <div class="col-md-6 col-lg-4 d-flex">
+        <a class="card product-card" th:href="@{https://www.3iecr.net/prodotto/registratori-telematici-rt/rt30/72/}">
+          <img th:src="@{/img/registratori/RT-30.jpg}" class="card-img-top product-img" alt="RT-30">
+          <div class="card-body">
+            <h5 class="card-title">RT-30</h5>
+            <p class="card-text">Un registratore versatile e compatto, ideale per attività di fascia media grazie al suo equilibrio tra performance e semplicità.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- RT-52 -->
+      <div class="col-md-6 col-lg-4 d-flex">
+        <a class="card product-card" th:href="@{https://www.3iecr.net/prodotto/registratori-telematici-rt/rt52/67/}">
+          <img th:src="@{/img/registratori/RT-52.jpg}" class="card-img-top product-img" alt="RT-52">
+          <div class="card-body">
+            <h5 class="card-title">RT-52</h5>
+            <p class="card-text">Design moderno, funzionalità avanzate e perfetta per ambienti ad alto flusso: la scelta ideale per la fascia alta.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- RT-50 PRIME -->
+      <div class="col-md-6 col-lg-4 d-flex">
+        <a class="card product-card" th:href="@{https://www.3iecr.net/prodotto/registratori-telematici-rt/rt-50-prime/112/}">
+          <img th:src="@{/img/registratori/RT-50Prime.png}" class="card-img-top product-img" alt="RT-50 PRIME">
+          <div class="card-body">
+            <h5 class="card-title">RT-50 PRIME</h5>
+            <p class="card-text">Con tastiera retroilluminata e doppi display, combina design avveniristico con massima usabilità.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- RT-50 PRIME TOUCH -->
+      <div class="col-md-6 col-lg-4 d-flex">
+        <a class="card product-card" th:href="@{https://www.3iecr.net/prodotto/registratori-telematici-rt/rt-50-prime-touch/110/}">
+          <img th:src="@{/img/registratori/RT-50PT.png}" class="card-img-top product-img" alt="RT-50 PRIME TOUCH">
+          <div class="card-body">
+            <h5 class="card-title">RT-50 PRIME TOUCH</h5>
+            <p class="card-text">Touchscreen da 8", compatto e intelligente. Pensato per chi vuole velocità ed eleganza nel punto vendita.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
