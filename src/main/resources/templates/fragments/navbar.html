@@ -1,32 +1,49 @@
 <style>
   .logo-img {
-    height: 50px;
+    height: 48px;
     width: auto;
     object-fit: contain;
     transition: transform 0.2s ease;
   }
 
   .logo-img:hover {
-    transform: scale(1.05);
+    transform: scale(1.07);
   }
 
   .navbar {
     background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
   }
 
   .navbar-nav .nav-link {
     font-weight: 500;
-    color: #343a40;
-    transition: color 0.2s ease;
+    color: #2c3e50;
+    transition: all 0.2s ease-in-out;
   }
 
-  .navbar-nav .nav-link:hover {
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active {
     color: #0d6efd;
   }
 
   .dropdown-menu {
     border-radius: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.2s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .form-control::placeholder {
@@ -36,14 +53,25 @@
 
   .btn-outline-success {
     border-radius: 0.375rem;
+    font-weight: 500;
+  }
+
+  .navbar-toggler {
+    border: none;
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: none;
   }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" th:href="@{/printerhouse/home}">
-      <img th:src="@{/img/logo.jpg}" alt="Logo PrinterHouse" class="logo-img" />
+    <a class="navbar-brand d-flex align-items-center" th:href="@{/printerhouse/home}">
+      <img th:src="@{/img/logo.jpg}" alt="Logo PrinterHouse" class="logo-img me-2" />
+      <span class="fw-semibold text-dark d-none d-sm-inline"></span>
     </a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
       aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -52,18 +80,18 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
         <li class="nav-item">
-          <a class="nav-link active" th:href="@{/printerhouse/home}">Home</a>
+          <a class="nav-link" th:href="@{/printerhouse/home}"><i class="bi bi-house-door-fill me-1"></i>Home</a>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-            I Nostri Prodotti
+            <i class="bi bi-grid-fill me-1"></i>I Nostri Servizi
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Software Gestionali</a></li>
-            <li><a class="dropdown-item" th:href="@{/printerhouse/home/riciclo}">Smaltimento Toner</a></li>
-            <li><a class="dropdown-item" th:href="@{/printerhouse/home/registratori}">Registratori Telematici</a></li>
+            <li><a class="dropdown-item" th:href="@{/printerhouse/home/sito}">💻 Siti Web per Imprese</a></li>
+            <li><a class="dropdown-item" th:href="@{/printerhouse/home/riciclo}">♻️ Smaltimento Toner</a></li>
+            <li><a class="dropdown-item" th:href="@{/printerhouse/home/registratori}">🧾 Registratori Telematici</a></li>
           </ul>
         </li>
       </ul>

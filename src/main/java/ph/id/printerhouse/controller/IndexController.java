@@ -93,4 +93,9 @@ public class IndexController {
         return "/subpages/riciclo";
     }
     
+    @GetMapping("/sito")
+    public String indexSito() {
+        return "/subpages/siti";
+    }
+    
 }

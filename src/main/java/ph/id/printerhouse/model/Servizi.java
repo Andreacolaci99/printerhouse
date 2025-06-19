@@ -1,5 +1,6 @@
 package ph.id.printerhouse.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Servizi {
     private String name;
 
     @NotBlank(message = "Il campo descrizione non può essere vuoto")
+    @Column(length=2500)
     private String descrizione;
 
     @NotBlank(message = "Il campo foto non può essere vuoto")
