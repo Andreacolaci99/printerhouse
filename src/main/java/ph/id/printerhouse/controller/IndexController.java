@@ -104,7 +104,7 @@ public class IndexController {
 
     @GetMapping("/contattaci")
     public String indexContatto() {
-        return "/subpages/contatto";
+        return "subpages/contatto";
     }
 
     @PostMapping("/contattaci")
