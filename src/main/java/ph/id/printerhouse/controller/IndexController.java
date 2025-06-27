@@ -3,6 +3,8 @@ package ph.id.printerhouse.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,8 +46,8 @@ public class IndexController {
 
     @PostMapping("/creaservizio")
     public String postFormServizio(@Valid @ModelAttribute("servizio") Servizi formServizi,
-                                    BindingResult bindingResult,
-                                    Model model) {
+            BindingResult bindingResult,
+            Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("servizio", formServizi);
             return "create";
@@ -68,8 +70,8 @@ public class IndexController {
 
     @PostMapping("/edit/{id}")
     public String updateServizio(@Valid @ModelAttribute("servizio") Servizi formServizi,
-                                  BindingResult bindingResult,
-                                  Model model) {
+            BindingResult bindingResult,
+            Model model) {
         if (bindingResult.hasErrors()) {
             return "edit";
         }
@@ -96,4 +98,41 @@ public class IndexController {
     public String indexSito() {
         return "subpages/siti";
     }
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @GetMapping("/contattaci")
+    public String indexContatto() {
+        return "/subpages/contatto";
+    }
+
+    @PostMapping("/contattaci")
+    public String inviaRichiesta(@RequestParam String servizio,
+            @RequestParam String nome,
+            @RequestParam String cognome,
+            @RequestParam String email,
+            @RequestParam(required = false) String azienda,
+            @RequestParam String messaggio) {
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo("printerhouse@gmail.com");
+        message.setSubject("Richiesta Preventivo - " + servizio);
+        message.setText("Nome: " + nome +
+                "\nCognome: " + cognome +
+                "\nEmail: " + email +
+                "\nAzienda: " + azienda +
+                "\nServizio richiesto: " + servizio +
+                "\n\nMessaggio:\n" + messaggio);
+
+        mailSender.send(message);
+
+        return "/grazie"; // Pagina di conferma
+    }
+
+    @GetMapping("/grazie")
+    public String paginaGrazie() {
+        return "grazie"; // Thymeleaf view: grazie.html
+    }
+
 }
