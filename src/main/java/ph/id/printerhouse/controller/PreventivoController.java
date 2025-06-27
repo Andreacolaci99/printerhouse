@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/printerhouse/home")
+@RequestMapping("/")
 public class PreventivoController {
 
     @Autowired
@@ -41,7 +41,7 @@ public class PreventivoController {
 
         mailSender.send(message);
 
-        return "redirect:/printerhouse/home/grazie"; // Pagina di conferma
+        return "/grazie"; // Pagina di conferma
     }
 
     @GetMapping("/grazie")

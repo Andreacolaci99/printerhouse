@@ -18,13 +18,13 @@ import ph.id.printerhouse.model.Servizi;
 import ph.id.printerhouse.repository.ServiziRepository;
 
 @Controller
-@RequestMapping("/printerhouse/home")
+@RequestMapping("/")
 public class IndexController {
 
     @Autowired
     private ServiziRepository serviziRepository;
 
-    @GetMapping()
+    @GetMapping
     public String index(Model model, @RequestParam(name = "keyword", required = false) String name) {
         List<Servizi> listaservizi;
         if (name != null && !name.isBlank()) {
@@ -33,7 +33,7 @@ public class IndexController {
             listaservizi = serviziRepository.findAll();
         }
         model.addAttribute("servizi", listaservizi);
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/creaservizio")
@@ -44,58 +44,56 @@ public class IndexController {
 
     @PostMapping("/creaservizio")
     public String postFormServizio(@Valid @ModelAttribute("servizio") Servizi formServizi,
-            BindingResult bindingResult,
-            Model model) {
+                                    BindingResult bindingResult,
+                                    Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("servizio", formServizi);
             return "create";
         }
         serviziRepository.save(formServizi);
-        return "redirect:/printerhouse/home";
+        return "redirect:/";
     }
 
     @PostMapping("/delete/{id}")
     public String deleteServizio(@PathVariable("id") Integer id) {
-
         serviziRepository.deleteById(id);
-        return "redirect:/printerhouse/home";
+        return "redirect:/";
     }
 
     @GetMapping("/edit/{id}")
     public String editServizio(@PathVariable("id") Integer id, Model model) {
-
         model.addAttribute("servizio", serviziRepository.findById(id).get());
         return "edit";
     }
 
     @PostMapping("/edit/{id}")
-    public String updateServizio(@Valid @ModelAttribute("servizio") Servizi formServizi, BindingResult bindingResult,
-            Model model) {
+    public String updateServizio(@Valid @ModelAttribute("servizio") Servizi formServizi,
+                                  BindingResult bindingResult,
+                                  Model model) {
         if (bindingResult.hasErrors()) {
             return "edit";
         }
         serviziRepository.save(formServizi);
-        return "redirect:/printerhouse/home";
+        return "redirect:/";
     }
 
     @GetMapping("/registratori")
     public String indexRegistratori() {
-        return "/subpages/registratoriCassa";
+        return "subpages/registratoriCassa";
     }
 
     @GetMapping("/multifunzione")
     public String indexStampanti() {
-        return "/subpages/multifunzioni";
+        return "subpages/multifunzioni";
     }
-    
+
     @GetMapping("/riciclo")
     public String indexRiciclo() {
-        return "/subpages/riciclo";
+        return "subpages/riciclo";
     }
-    
+
     @GetMapping("/sito")
     public String indexSito() {
-        return "/subpages/siti";
+        return "subpages/siti";
     }
-  
 }

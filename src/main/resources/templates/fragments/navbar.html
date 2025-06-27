@@ -99,7 +99,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center" th:href="@{/printerhouse/home}">
+    <a class="navbar-brand d-flex align-items-center" th:href="@{/}">
       <img th:src="@{/img/logo.jpg}" alt="Logo PrinterHouse" class="logo-img me-2" />
       <span class="fw-semibold text-dark d-none d-sm-inline">PrinterHouse</span>
     </a>
@@ -112,7 +112,7 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/printerhouse/home}">
+          <a class="nav-link" th:href="@{/}">
             <i class="bi bi-house-door-fill me-1"></i>Home
           </a>
         </li>
@@ -123,16 +123,16 @@
             <i class="bi bi-grid-fill me-1"></i>I Nostri Servizi
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" th:href="@{/printerhouse/home/sito}">💻 Siti Web per Imprese</a></li>
-            <li><a class="dropdown-item" th:href="@{/printerhouse/home/riciclo}">♻️ Smaltimento Toner</a></li>
-            <li><a class="dropdown-item" th:href="@{/printerhouse/home/registratori}">🧾 Registratori Telematici</a></li>
+            <li><a class="dropdown-item" th:href="@{/sito}">💻 Siti Web per Imprese</a></li>
+            <li><a class="dropdown-item" th:href="@{/riciclo}">♻️ Smaltimento Toner</a></li>
+            <li><a class="dropdown-item" th:href="@{/registratori}">🧾 Registratori Telematici</a></li>
           </ul>
         </li>
       </ul>
 
       <!-- Contattaci + Search -->
       <div class="navbar-end">
-        <a class="nav-link" th:href="@{/printerhouse/home/contattaci}">
+        <a class="nav-link" th:href="@{/contattaci}">
           <i class="bi bi-person-lines-fill me-1"></i>Contattaci
         </a>
 
