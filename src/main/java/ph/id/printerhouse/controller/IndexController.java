@@ -3,10 +3,13 @@ package ph.id.printerhouse.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import jakarta.validation.Valid;
 import ph.id.printerhouse.model.Servizi;
@@ -108,13 +112,36 @@ public class IndexController {
     }
 
     @PostMapping("/contattaci")
-    public String inviaRichiesta(@RequestParam String servizio,
+    public String inviaRichiesta(
+            @RequestParam String servizio,
             @RequestParam String nome,
             @RequestParam String cognome,
             @RequestParam String email,
             @RequestParam(required = false) String azienda,
-            @RequestParam String messaggio) {
+            @RequestParam String messaggio,
+            @RequestParam(name = "g-recaptcha-response") String recaptchaResponse, // Riceve token reCAPTCHA
+            Model model) {
 
+        // 🔑 La tua Secret Key (puoi tenerla anche qui per test, ma poi mettila in
+        // application.properties!)
+        String secretKey = "6LehhX4rAAAAAOPWAMKbq7kwtvozExoHHezJpRQG";
+
+        // Verifica con Google reCAPTCHA
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://www.google.com/recaptcha/api/siteverify";
+
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("secret", secretKey);
+        params.add("response", recaptchaResponse);
+
+        ResponseEntity<String> recaptchaVerifyResponse = restTemplate.postForEntity(url, params, String.class);
+
+        if (!recaptchaVerifyResponse.getBody().contains("\"success\": true")) {
+            model.addAttribute("error", "Verifica CAPTCHA fallita. Riprova.");
+            return "subpages/contatto"; // Ritorna alla pagina con messaggio di errore
+        }
+
+        // ✅ Se CAPTCHA OK → invia email
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo("printerhouse@gmail.com");
         message.setSubject("Richiesta Preventivo - " + servizio);
@@ -127,12 +154,11 @@ public class IndexController {
 
         mailSender.send(message);
 
-        return "/grazie"; // Pagina di conferma
+        return "redirect:/grazie"; // Pagina di conferma
     }
 
     @GetMapping("/grazie")
     public String paginaGrazie() {
         return "grazie"; // Thymeleaf view: grazie.html
     }
-
 }
